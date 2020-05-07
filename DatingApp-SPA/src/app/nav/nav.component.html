@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+  <a class="navbar-brand" [routerLink]="['/home']">Dating Villa</a>
+
+  <div class="container">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/members']">Matches</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/lists']">Lists</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+      </li>
+    </ul>
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <span class="mr-2">
+        <img src="{{photoUrl || '../../../assets/user.png'}}">
+      </span>
+      <button class="dropdown-toggle" dropdownToggle> Welcome {{ authService.decodedToken?.nameid[1] | titlecase}}
+      </button>
+      <div class="dropdown-menu" *bsDropdownMenu>
+        <a class="dropdown-item mt-3" [routerLink]="['/member/edit']"> <i class="fa fa-user"></i> Edit Profile</a>
+        <div class="dropdown divider"></div>
+
+        <!--  <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+       -->
+        <a class="dropdown-item" (click)="logout()" [routerLink]="[]"> <i class="fa fa-sign-out"></i> Logout</a>
+
+
+
+      </div>
+    </div>
+
+    <form *ngIf="!loggedIn()" #loginFor="ngForm" class="form-inline my-2 my-lg-0"
+      (ngSubmit)="loginFor.valid && login()">
+      <input class="form-control mr-sm-2" name="username" type="text" placeholder="Username"
+        [(ngModel)]="model.username">
+      <input class="form-control mr-sm-2" name="password" type="password" placeholder="Password"
+        [(ngModel)]="model.password">
+        <!--<div class="login">
+        <a href="#">Something else here</a>
+        </div>*/
+      <a href="" class="bg-light active my-2 my-sm-0" type="submit">Login</a>
+      -->
+    <button [disabled]="!loginFor.valid" class="btn btn-primary active my-2 my-sm-0" type="submit">Login</button>
+   
+    </form>
+  </div>
+</nav>
+<!--[disabled]="!editForm.dirty"-->
+
+<!--Forms Validations Start
+<pre>
+  <h5> Forms Validations</h5>
+  Form Valid :  {{loginFor.valid}}
+  Form Touched :  {{loginFor.touched}}
+  Form Dirty:  {{loginFor.dirty}}
+  Form Values:  {{loginFor.value | json}}
+
+  username Valid {{model.username.valid}}
+  username Touched {{model.username.touched}}
+  username Dirty {{model.username.dirty}}
+  username Values {{model.username.value}}
+
+  password Valid {{model.password.valid}}
+  password Touched {{model.password.touched}}
+  password Dirty {{model.password.dirty}}
+  password Values {{model.password.value}}
+</pre>
+
+Forms Validations End -->

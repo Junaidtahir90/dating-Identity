@@ -1,0 +1,7 @@
+.vscode
+.vc
+bin
+obj
+.zip
+.wwwroot
+.Properties/PublishProfiles
